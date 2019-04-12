@@ -2,24 +2,10 @@
   <div class="popup">
     <div class="search-wrapper">
       <label>Search title:</label>
-      <input
-        @keydown="test"
-        tabindex="0"
-        ref="searchbar"
-        type="text"
-        v-model="search"
-        placeholder="Search tabs.."
-      >
+      <input ref="searchbar" type="text" v-model="search" placeholder="Search tabs..">
     </div>
     <div v-if="tabs">
-      <Tab
-        ref="test"
-        :class="{ focus: index === focus }"
-        v-on:removeTab="removeTab"
-        v-for="tab, index in filteredTabs"
-        :key="tab.id"
-        :tab="tab"
-      ></Tab>
+      <Tab v-on:removeTab="removeTab" v-for="tab in filteredTabs" :key="tab.id" :tab="tab"></Tab>
     </div>
   </div>
 </template>
@@ -35,7 +21,6 @@ export default {
     return {
       tabs: null,
       search: '',
-      focus: null,
     };
   },
   mounted() {
@@ -48,7 +33,15 @@ export default {
   },
   methods: {
     removeTab(tabId) {
+      const tabToRemoveIndex = this.tabs.find(tab => tab.id === tabId).index;
+
       this.tabs = this.tabs.filter(tab => tab.id !== tabId);
+      console.log(tabToRemoveIndex);
+      this.tabs.forEach(function(tab) {
+        if (tab.index > tabToRemoveIndex) {
+          tab.index = tab.index - 1;
+        }
+      });
     },
 
     loadState(cb) {
@@ -59,24 +52,6 @@ export default {
         }
         cb();
       });
-    },
-    test: function(event) {
-      switch (event.keyCode) {
-        case 38:
-          if (this.focus === null) {
-            this.focus = 0;
-          } else if (this.focus > 0) {
-            this.focus--;
-          }
-          break;
-        case 40:
-          if (this.focus === null) {
-            this.focus = 0;
-          } else if (this.focus < this.items.length - 1) {
-            this.focus++;
-          }
-          break;
-      }
     },
   },
   computed: {
@@ -89,7 +64,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .popup {
   width: 300px;
   box-sizing: border-box;
@@ -133,9 +108,6 @@ export default {
         font-weight: 100;
       }
     }
-  }
-  .tab-wrapper.focus {
-    border: 1px solid blue;
   }
 }
 </style>

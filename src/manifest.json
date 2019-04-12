@@ -1,25 +1,18 @@
 {
-  "name": "tabbi",
-  "description": "A VueJS web extension for managing tabs",
+  "name": "Tabbi",
+  "description": "Meet Tabbi! A reliable and lightweight chrome extension for searching and sorting open tabs.",
   "version": 1.0,
   "permissions": ["storage", "tabs", "bookmarks", "declarativeContent", "activeTab"],
   "manifest_version": 2,
   "icons": {
-    "48": "icons/icon_48.png",
-    "128": "icons/icon_128.png"
+    "48": "icons/Tabbi_48.png",
+    "128": "icons/Tabbi_128.png"
   },
   "browser_action": {
-    "default_title": "tabbi",
+    "default_title": "Tabbi",
     "default_popup": "popup/popup.html"
   },
   "commands": {
-    "toggle-feature": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y"
-      },
-      "description": "Send a 'toggle-feature' event to the extension"
-    },
     "_execute_browser_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+S",

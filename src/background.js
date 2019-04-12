@@ -10,20 +10,19 @@ chrome.runtime.onInstalled.addListener(function(details) {
   console.log('Extension installed: ' + details.reason);
   storeState();
 });
-
+chrome.runtime.onStartup.addListener(function() {
+  console.log('Extension started');
+  storeState();
+});
 chrome.tabs.onCreated.addListener(function() {
   storeState();
 });
-
 chrome.tabs.onUpdated.addListener(function() {
   storeState();
 });
-
 chrome.tabs.onRemoved.addListener(function() {
   storeState();
 });
-
-chrome.runtime.onStartup.addListener(function() {
-  console.log('Extension started');
+chrome.tabs.onReplaced.addListener(function() {
   storeState();
 });
