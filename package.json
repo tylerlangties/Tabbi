@@ -1,6 +1,6 @@
 {
   "name": "tabbi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A VueJS web extension for managing tabs",
   "author": "Tyler Langties",
   "scripts": {

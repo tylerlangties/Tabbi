@@ -1,5 +1,5 @@
 function storeState() {
-  chrome.tabs.query({}, function(tabs) {
+  chrome.tabs.query({ lastFocusedWindow: true }, function(tabs) {
     chrome.storage.local.set({ key: tabs }, function() {
       console.log('Value is set to ' + tabs);
     });
@@ -24,5 +24,8 @@ chrome.tabs.onRemoved.addListener(function() {
   storeState();
 });
 chrome.tabs.onReplaced.addListener(function() {
+  storeState();
+});
+chrome.windows.onFocusChanged.addListener(function() {
   storeState();
 });
